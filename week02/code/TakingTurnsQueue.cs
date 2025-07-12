@@ -41,8 +41,13 @@ public class TakingTurnsQueue
         {
             Person person = _people.Dequeue();
             if (person.Turns > 1)
-            {
+            {                
                 person.Turns -= 1;
+                _people.Enqueue(person);
+            }
+            //added else if statement; if turns <= 0, the person needs to have infinite turns, but it was only removing the person
+            else if (person.Turns <= 0)
+            {
                 _people.Enqueue(person);
             }
 
